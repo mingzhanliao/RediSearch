@@ -1180,7 +1180,7 @@ static int periodicCb(RedisModuleCtx *ctx, void *privdata) {
     FGC_childScanIndexes(gc);
     close(gc->pipefd[GC_WRITERFD]);
     sleep(RSGlobalConfig.forkGcSleepBeforeExit);
-    _exit(EXIT_SUCCESS);
+    exit(EXIT_SUCCESS);
   } else {
     // main process
     close(gc->pipefd[GC_WRITERFD]);
