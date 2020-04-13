@@ -16,6 +16,7 @@
 #include <float.h>
 #include "module.h"
 #include "rmutil/rm_assert.h"
+#include <gcov.h>
 
 #ifdef __linux__
 #include <sys/prctl.h>
@@ -1180,7 +1181,8 @@ static int periodicCb(RedisModuleCtx *ctx, void *privdata) {
     FGC_childScanIndexes(gc);
     close(gc->pipefd[GC_WRITERFD]);
     sleep(RSGlobalConfig.forkGcSleepBeforeExit);
-    exit(EXIT_SUCCESS);
+    __gcov_flush();
+    _exit(EXIT_SUCCESS);
   } else {
     // main process
     close(gc->pipefd[GC_WRITERFD]);
