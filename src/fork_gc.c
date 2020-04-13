@@ -17,7 +17,7 @@
 #include "module.h"
 #include "rmutil/rm_assert.h"
 
-#ifdef USE_COVERAGE
+#ifdef COVERAGE
 #include <gcov.h>
 #endif
 
@@ -1184,7 +1184,7 @@ static int periodicCb(RedisModuleCtx *ctx, void *privdata) {
     FGC_childScanIndexes(gc);
     close(gc->pipefd[GC_WRITERFD]);
     sleep(RSGlobalConfig.forkGcSleepBeforeExit);
-#ifdef USE_COVERAGE
+#ifdef COVERAGE
     __gcov_flush();
 #endif
     _exit(EXIT_SUCCESS);
